@@ -9,7 +9,7 @@ const source = process.env.SITE
 
 exports.handler = function(event, context, callback) {
     
-    let body;
+    let body = "" + JSON.stringify(event) + JSON.stringify(context);
     
     if(!!source){
         body = https.get(source).body;
