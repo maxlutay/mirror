@@ -7,25 +7,31 @@ const source = process.env.SITE
 
 
 
-exports.handler = function(event, context, callback) {
-    
-    let body = ` ${JSON.stringify(event)}\n ${JSON.stringify(context)}\n`;
+exports.handler = function (event, context, callback) {
 
-    let cb = callback.bind(null,null, {
-        statusCode: 200,
-        body
-    });
+    let body = ` ${JSON.stringify(event)} <br> ${JSON.stringify(context)} <br>`;
 
-    if(!!source){
-        https.get(source,res => {
+
+
+    if (!!source) {
+        https.get(source, res => {
             res.on("data", d => body += d);
-            res.on("end", () => cb() )
+            res.on("end", () => {
+                body += "<hr>";
+                callback(null, {
+                    statusCode: 200,
+                    body
+                });
+            });
         });
-    }else {
+    } else {
         body += "<h1> omg, wtf</h1>";
-        cb();
+        callback(null, {
+            statusCode: 200,
+            body
+        });
     }
-    
+
 
 
 }
