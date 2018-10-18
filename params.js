@@ -6,4 +6,4 @@ module.exports =  {
     SITE: process.argv[3]
 };
 
-console.log(module.exports.PORT, module.exports.SITE);
+console.log(`port: ${module.exports.PORT},source: ${module.exports.SITE}`);
