@@ -12,7 +12,7 @@ exports.handler = function(event, context, callback) {
     let body;
     
     if(!!source){
-        body = https.get(source);
+        body = https.get(source).body;
     }else {
         body = "<h1> omg, wtf</h1>";
     }
