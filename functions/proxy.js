@@ -18,6 +18,11 @@ exports.handler = function (event, context, callback) {
             res.on("data", d => body += d);
             res.on("end", () => {
                 body += "<hr>";
+
+                body.replace( source, "./.netlify/functions/proxy" );
+                body.replace( /^"\.?\.?\//, "./.netlify/functions/proxy/" );
+
+
                 callback(null, {
                     statusCode: 200,
                     body
