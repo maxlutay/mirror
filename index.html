@@ -8,7 +8,7 @@
 </head>
 <body>
     <script>
-        fetch("google.com").then(val => document.body = val);
+        fetch("google.com").then(res => document.body = res.text());
     </script>
 </body>
 </html>
