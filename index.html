@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <script>
-        fetch("./functions/proxy.js").then(res => res.text()).then(text => document.body.innerHTML = text).catch(_=> document.body.innerText = `Sorry, some error: ${_}`);
+        fetch("./.netlify/functions/proxy").then(res => res.text()).then(text => document.body.innerHTML = text).catch(_=> document.body.innerText = `Sorry, some error: ${_}`);
     </script>
 </head>
 <body>
