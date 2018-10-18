@@ -9,7 +9,7 @@ const source = process.env.SITE
 
 exports.handler = function (event, context, callback) {
 
-    let body = ` ${JSON.stringify(event)} <br> ${JSON.stringify(context)} <br>`;
+    let body = `source <br> ${JSON.stringify(event)} <br> ${JSON.stringify(context)} <hr>`;
 
 
 
