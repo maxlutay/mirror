@@ -8,7 +8,7 @@
 </head>
 <body>
     <script>
-        fetch("./functions/proxy.js").then(res => document.body = res.text());
+        fetch("./functions/proxy.js").then(res => document.body.innerHTML = res.text());
     </script>
 </body>
 </html>
