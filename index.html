@@ -10,10 +10,11 @@
         fetch("./.netlify/functions/proxy")
             .then(res => res.text())
             .then(text => {
-                let t = text;
-                //t.replace(source, "./.netlify/functions/proxy");
-                t.replace(/^"\.?\.?\//, "./.netlify/functions/proxy/");
-                return t;
+                return text.
+                replace(/^"\.?\.?\//, "./.netlify/functions/proxy/")
+                .replace(source, "./.netlify/functions/proxy");
+                ;
+                
             })
             .then(text => document.body.innerHTML = text)
             .catch(_ => document.body.innerText = `Sorry, some error: ${_}`);
