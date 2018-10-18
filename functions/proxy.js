@@ -1,19 +1,23 @@
 
-const http = require("http");
+const https = require("https");
 
 const source = process.env.SITE
-let body;
 
-if(!!source){
-    body = http.get(source);
-}else {
-    body = "<h1> omg, wtf</h1>";
-}
 
 
 
 
 exports.handler = function(event, context, callback) {
+    
+    let body;
+    
+    if(!!source){
+        body = https.get(source);
+    }else {
+        body = "<h1> omg, wtf</h1>";
+    }
+    
+
     callback(null, {
     statusCode: 200,
     body
