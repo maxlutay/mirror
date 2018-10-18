@@ -7,7 +7,16 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <script>
-        fetch("./.netlify/functions/proxy").then(res => res.text()).then(text => document.body.innerHTML = text).catch(_=> document.body.innerText = `Sorry, some error: ${_}`);
+        fetch("./.netlify/functions/proxy")
+            .then(res => res.text())
+            .then(text => {
+                let t = text;
+                t.replace(source, "./.netlify/functions/proxy");
+                t.replace(/^"\.?\.?\//, "./.netlify/functions/proxy/");
+                return t;
+            })
+            .then(text => document.body.innerHTML = text)
+            .catch(_ => document.body.innerText = `Sorry, some error: ${_}`);
     </script>
 </head>
 <body>
