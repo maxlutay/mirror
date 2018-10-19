@@ -10,7 +10,7 @@
         fetch("./.netlify/functions/proxy")
             .then(res => res.text())
             .then(text => {
-                return text.replace(/"(\.?\.?\/)/g, "\"./.netlify/functions/proxy/$1")
+                return text.replace(/="\.?\.?\/((\w|(\\"))+)"/g, "\"./.netlify/functions/proxy/$1")
                     //.replace(new RegEx(source), "./.netlify/functions/proxy")
                     ;
 
@@ -22,12 +22,12 @@
                     ev.preventDefault();
                     fetch("./.netlify/functions/proxy/" + a.getAttribute("href"))
                         .then(res => res.text())
-                        .then(text => {
+                        /* .then(text => {
                             return text.replace(/"(\.?\.?\/)/g, "\"./.netlify/functions/proxy/$1")
                                 //.replace(new RegEx(source), "./.netlify/functions/proxy")
                                 ;
 
-                        })
+                        }) */
                         .then(text => document.body.innerHTML = text)
                         .catch(_ => document.body.innerText = `Sorry, some error: ${_}`)
                 }));
