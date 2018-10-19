@@ -8,13 +8,15 @@ const source = process.env.SITE
 
 
 exports.handler = function (event, context, callback) {
+    
+    const path = event.path.replace(new RegExp(".netlify/functions/proxy/","g"),"");
+    
+    let to = !path ? source : source + path;
+    let body = `${to} <br> ${JSON.stringify(event)} <br> ${JSON.stringify(context)} <hr>`;
 
-    let body = `${source} <br> ${JSON.stringify(event)} <br> ${JSON.stringify(context)} <hr>`;
-
-    const path = event.path.replace(new RegExp("./.netlify/functions/proxy/","g"),"./");
 
     if (!!source) {
-        https.get(!path ? source : source + path, res => {
+        https.get(to, res => {
             res.on("data", d => body += d);
             res.on("end", () => {
                 body += "<hr>";
