@@ -10,8 +10,7 @@
         fetch("./.netlify/functions/proxy")
             .then(res => res.text())
             .then(text => {
-                return text.
-                replace(/^"(\.?)\.?\//g, "$1./.netlify/functions/proxy/")
+                return text.replace(/^"(\.?)\.?\//g, "$1./.netlify/functions/proxy/")
                 //.replace(new RegEx(source), "./.netlify/functions/proxy")
                 ;
                 
