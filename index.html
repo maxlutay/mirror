@@ -15,7 +15,7 @@
                 ;
                 
             })
-            .then(text => document.innerHTML = text)
+            .then(text => document.body.innerHTML = text)
             .catch(_ => document.body.innerText = `Sorry, some error: ${_}`)
             .then(()=>{
                 document.querySelectorAll("a").forEach(a => a.addEventListener("click",(ev)=>{
