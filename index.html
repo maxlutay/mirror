@@ -11,7 +11,7 @@
             .then(res => res.text())
             .then(text => {
                 return text.
-                replace(/^"\.?\.?\//g, "./.netlify/functions/proxy/")
+                replace(/^"(\.?)\.?\//g, "$1./.netlify/functions/proxy/")
                 //.replace(new RegEx(source), "./.netlify/functions/proxy")
                 ;
                 
