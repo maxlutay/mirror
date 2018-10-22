@@ -14,7 +14,7 @@
                     //.replace(new RegEx(source), "./.netlify/functions/proxy")
                     ;
             })
-            .then(text => (console.log(text),document.innerHTML = `!DOCTYPE HTML ${text}`))
+            .then(text => (console.log(text),document.innerHTML = `<!DOCTYPE HTML> ${text}`))
             .catch(_ => document.body.innerText = `Sorry, some error: ${_}`)
             .then(() => {
                 document.querySelectorAll("a").forEach(a => a.addEventListener("click", (ev) => {
