@@ -10,7 +10,7 @@
         fetch("./.netlify/functions/proxy")
             .then(res => res.text())
             .then(text => {
-                return text.replace(/(href|link|src)="(\/)?([^"]+?)"/g, "$1=\"./.netlify/functions/proxy/$2$3\"");
+                return text.replace(/(href|link|src)="(?!https?)(\/)?([^"]+?)"/g, "$1=\"./.netlify/functions/proxy$2$3\"");
             })
             .then(text => (console.log(text), document.documentElement.innerHTML = text))
             .catch(_ => document.body.innerText = `Sorry, some error: ${_}`)
