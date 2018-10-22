@@ -14,15 +14,15 @@ exports.handler = function (event, context, callback) {
     let to = !path ? source : source + path;
     //let body = `p ${path} s ${source} t ${to} <br> ${JSON.stringify(event)} <br> ${JSON.stringify(context)} <hr>`;
 
-
+    let body;
     if (!!source) {
         https.get(to, res => {
             res.on("data", d => body += d);
             res.on("end", () => {
-                //body += "<hr>";
+                body += `/*<!-- ${to} -->*/`
                 callback(null, {
                     statusCode: 200,
-                    body
+                    body 
                 });
             });
         });
