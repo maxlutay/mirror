@@ -19,7 +19,7 @@ exports.handler = function (event, context, callback) {
         https.get(to, res => {
             res.on("data", d => body += d);
             res.on("end", () => {
-                body += `/*<!-- ${to} -->*/`
+                body += `/*<!-- ${to}       ${JSON.stringify(event) } -->*/`
                 callback(null, {
                     statusCode: 200,
                     body 
@@ -29,7 +29,7 @@ exports.handler = function (event, context, callback) {
     } else {
         body += "<h1> omg, wtf</h1>";
         callback(null, {
-            statusCode: 200,
+            statusCode: 500,
             body
         });
     };
