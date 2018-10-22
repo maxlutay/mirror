@@ -15,10 +15,10 @@
             .then(text => (console.log(text), document.documentElement.innerHTML = text))
             .catch(_ => document.body.innerText = `Sorry, some error: ${_}`)
             .then(() => {
-                document.querySelectorAll("a").forEach(a => a.addEventListener("click", (ev) => {
+                document.querySelectorAll("a")..forEach(a => a.addEventListener("click", (ev) => {
                     ev.preventDefault();
                     let sth = a.getAttribute("href")//.replace(/^\.\/+/,"");
-                    fetch(/^https?:\/\//.test(sth) ? "./.netlify/functions/proxy/" + sth : sth)
+                    fetch(/^https?:\/\//.test(sth) ? sth :  "./.netlify/functions/proxy/" + sth )
                         .then(res => res.text())
                         .then(text => document.documentElement.innerHTML = text)
                         .catch(_ => document.body.innerText = `Sorry, some error: ${_}`)
