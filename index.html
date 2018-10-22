@@ -17,7 +17,7 @@
             .then(() => {
                 document.querySelectorAll("a").forEach(a => a.addEventListener("click", (ev) => {
                     ev.preventDefault();
-                    let sth = a.getAttribute("href");
+                    let sth = a.getAttribute("href").replace(/^\.\//,"");
                     fetch(/^https?:\/\//.test(sth) ? "./.netlify/functions/proxy/" + sth : sth)
                         .then(res => res.text())
                         .then(text => document.documentElement.innerHTML = text)
