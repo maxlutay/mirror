@@ -22,6 +22,7 @@ exports.handler = function (event, context, callback) {
                 body += `/*<!-- ${to}       ${JSON.stringify(event) } -->*/`
                 callback(null, {
                     statusCode: 200,
+                    headers: event.headers,
                     body 
                 });
             });
@@ -30,6 +31,7 @@ exports.handler = function (event, context, callback) {
         body += "<h1> omg, wtf</h1>";
         callback(null, {
             statusCode: 500,
+            headers: event.headers,
             body
         });
     };
