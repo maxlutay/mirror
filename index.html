@@ -10,14 +10,14 @@
         fetch("./.netlify/functions/proxy")
             .then(res => res.text())
             .then(text => {
-                return text.replace(/(href|link|src)="([^"]+?)"/g, "$1=\"./.netlify/functions/proxy/$2\"");
+                return text.replace(/(href|link|src)="(\/)?([^"]+?)"/g, "$1=\"./.netlify/functions/proxy/$2$3\"");
             })
             .then(text => (console.log(text), document.documentElement.innerHTML = text))
             .catch(_ => document.body.innerText = `Sorry, some error: ${_}`)
             .then(() => {
                 document.querySelectorAll("a").forEach(a => a.addEventListener("click", (ev) => {
                     ev.preventDefault();
-                    let sth = a.getAttribute("href").replace(/^\.\/+/,"");
+                    let sth = a.getAttribute("href")//.replace(/^\.\/+/,"");
                     fetch(/^https?:\/\//.test(sth) ? "./.netlify/functions/proxy/" + sth : sth)
                         .then(res => res.text())
                         .then(text => document.documentElement.innerHTML = text)
