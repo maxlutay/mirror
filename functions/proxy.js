@@ -9,7 +9,7 @@ const source = process.env.SITE
 
 exports.handler = function (event, context, callback) {
     
-    const path = event.path.replace( /\.netlify/functions/proxy/g ,"");
+    const path = event.path.replace( /\.netlify\/functions\/proxy/g ,"");
     
     let to = !path ? source : source + path;
     //let body = `p ${path} s ${source} t ${to} <br> ${JSON.stringify(event)} <br> ${JSON.stringify(context)} <hr>`;
