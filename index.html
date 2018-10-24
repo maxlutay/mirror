@@ -11,9 +11,9 @@
             .then(res => res.text())
             .then(text => {
                 return text.
-                replace(/(href|link|src|background)="(?!https?)\.?\/?([^"]+?)"/g, "$1=\"./.netlify/functions/proxy/$2\"")
+                replace(/(href|link|src|background)="(?!https?)\.?\/?([^"]+?)"/g, "$1=\"./.netlify/functions/proxy/?to=$2\"")
                 .replace(/url\((?!https?)\.\.\/?([^)]+?)\)/g,
-                "url($1)")
+                "url(./netlify/functions/proxy/?to=$1)")
                 .replace("</head>", document.getElementById("myreplacer") + "</head>" );
                 ;
             })
@@ -23,7 +23,7 @@
                 document.querySelectorAll('a:not([href^="http"])').forEach(a => a.addEventListener("click", (ev) => {
                     ev.preventDefault();
                     let sth = a.getAttribute("href")//.replace(/^\.\/+/,"");
-                    fetch(/^https?:\/\//.test(sth) ? sth :  "./.netlify/functions/proxy/" + sth )
+                    fetch(/^https?:\/\//.test(sth) ? sth :  "./.netlify/functions/proxy/to=" + sth )
                         .then(res => res.text())
                         .then(text => document.documentElement.innerHTML = text)
                         .catch(_ => document.body.innerText = `Sorry, some error: ${_}`)
