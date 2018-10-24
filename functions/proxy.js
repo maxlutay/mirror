@@ -33,7 +33,7 @@ exports.handler = function (event, context, callback) {
                 statusCode: 200,
                 //headers: event.headers,
                 body,
-                isBase64Encoded: /(image|video)/.test(res.getHeader("content-type"))
+                isBase64Encoded: /(image|video)/.test(res.headers["content-type"])
             });
         });
     });
