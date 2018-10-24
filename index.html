@@ -14,7 +14,7 @@
                 replace(/(href|link|src|background)="(?!https?)\.?\/?([^"]+?)"/g, "$1=\"./.netlify/functions/proxy?to=$2\"")
                 .replace(/url\((?!https?)\.\.\/?([^)]+?)\)/g,
                 "url(./netlify/functions/proxy?to=$1)")
-                .replace("</head>", document.getElementById("myreplacer") + "</head>" );
+                .replace("</head>", `<script defer id="myreplacer"> ${ document.getElementById("myreplacer").innerHTML}</script> </head>` );
                 ;
             })
             .then(text => (console.log(text), document.documentElement.innerHTML = text))
