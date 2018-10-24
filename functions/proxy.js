@@ -11,7 +11,7 @@ exports.handler = function (event, context, callback) {
 
     const to = event.queryStringParameters.to;
 
-    let path = !path ? source : source + "/" + path;
+    let path = !to ? source : source + "/" + path;
     //let body = `p ${path} s ${source} t ${to} <br> ${JSON.stringify(event)} <br> ${JSON.stringify(context)} <hr>`;
 
     let body = "";
