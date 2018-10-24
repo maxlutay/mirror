@@ -1,5 +1,6 @@
 
 const https = require("https");
+const fs = require("fs");
 
 const source = process.env.SITE;
 
@@ -28,10 +29,16 @@ exports.handler = function (event, context, callback) {
     https.get(path, res => {
         res.on("data", d => body += d);
         res.on("end", () => {
-            body += `/*<!-- ${to}       ${JSON.stringify(event)} -->*/`
+            if(/html/.test(res.headers["content-type"]) ){
+                body.replace("</body>",`<script defer> ${ fs.readFileSync("../../replacer.js").toString() }</script></body>"`);
+                //body += `/*<!-- ${to}       ${JSON.stringify(event)} -->*/`
+            }
+            
             callback(null, {
                 statusCode: 200,
-                //headers: event.headers,
+                headers: {
+                    "content-type": res.headers["content-type"]
+                },
                 body,
                 isBase64Encoded: /(image|video)/.test(res.headers["content-type"])
             });
