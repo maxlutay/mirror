@@ -27,7 +27,7 @@
                 document.querySelectorAll('a:not([href^="http"])').forEach(a => a.addEventListener("click", (ev) => {
                     ev.preventDefault();
                     let sth = a.getAttribute("href")//.replace(/^\.\/+/,"");
-                    fetch("./.netlify/functions/proxyto=" + sth)
+                    fetch(sth)
                         .then(res => res.text())
                         .then(text => document.documentElement.innerHTML = text)
                         .catch(_ => document.body.innerText = `Sorry, some error: ${_}`)
