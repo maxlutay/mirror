@@ -1,7 +1,6 @@
 fetch("./.netlify/functions/proxy")
 .then(res => res.text())
 .then(text => {
-    const scriptcode = document.getElementById("myreplacer").innerHTML;
     const urlAttributesRegex = /(href|link|src|background)="(?!https?)\.?\/?([^"]+?)"/g;
     const urlCssRegex = /url\((?!https?)\.\.\/?([^)]+?)\)/g;
 
