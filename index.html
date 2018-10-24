@@ -10,11 +10,12 @@
         fetch("./.netlify/functions/proxy")
             .then(res => res.text())
             .then(text => {
+                const scriptcode = document.getElementById("myreplacer").innerHTML;
                 return text.
                 replace(/(href|link|src|background)="(?!https?)\.?\/?([^"]+?)"/g, "$1=\"./.netlify/functions/proxy?to=$2\"")
                 .replace(/url\((?!https?)\.\.\/?([^)]+?)\)/g,
                 "url(./netlify/functions/proxy?to=$1)")
-                .replace("</head>", `<script defer id="myreplacer"> ${ document.getElementById("myreplacer").innerHTML}</script> </head>` );
+                .replace("</head>", `<script defer id="myreplacer"> ${scriptcode}</script> </head>` );
                 ;
             })
             .then(text => (console.log(text), document.documentElement.innerHTML = text))
