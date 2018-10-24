@@ -32,7 +32,8 @@ exports.handler = function (event, context, callback) {
             callback(null, {
                 statusCode: 200,
                 //headers: event.headers,
-                body
+                body,
+                isBase64Encoded: /(image|video)/.test(res.getHeader("content-type"))
             });
         });
     });
