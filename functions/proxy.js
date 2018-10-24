@@ -8,22 +8,22 @@ const source = process.env.SITE
 
 
 exports.handler = function (event, context, callback) {
-    
-    const path = event.path.replace( /\.netlify\/functions\/proxy(\?to=)?/,"");
-    
-    let to = !path ? source : source + path;
+
+    const path = event.queryStringParameters.to;
+
+    let to = !path ? source : source + "/" + path;
     //let body = `p ${path} s ${source} t ${to} <br> ${JSON.stringify(event)} <br> ${JSON.stringify(context)} <hr>`;
 
-    let body="";
+    let body = "";
     if (!!source) {
         https.get(to, res => {
             res.on("data", d => body += d);
             res.on("end", () => {
-                body += `/*<!-- ${to}       ${JSON.stringify(event) } -->*/`
+                body += `/*<!-- ${to}       ${JSON.stringify(event)} -->*/`
                 callback(null, {
                     statusCode: 200,
                     //headers: event.headers,
-                    body 
+                    body
                 });
             });
         });
