@@ -12,24 +12,24 @@
             .then(text => {
                 const scriptcode = document.getElementById("myreplacer").innerHTML;
                 return text.
-                replace(/(href|link|src|background)="(?!https?)\.?\/?([^"]+?)"/g, "$1=\"./.netlify/functions/proxy?to=$2\"")
-                .replace(/url\((?!https?)\.\.\/?([^)]+?)\)/g,
-                "url(./netlify/functions/proxy?to=$1)")
-                .replace("</head>", `<script defer id="myreplacer"> ${scriptcode}</script> </head>` );
-                ;
-            })
-            .then(text => (console.log(text), document.documentElement.innerHTML = text))
-            .catch(_ => document.body.innerText = `Sorry, some error: ${_}`)
-            .then(() => {
-                document.querySelectorAll('a:not([href^="http"])').forEach(a => a.addEventListener("click", (ev) => {
-                    ev.preventDefault();
-                    let sth = a.getAttribute("href")//.replace(/^\.\/+/,"");
-                    fetch(/^https?:\/\//.test(sth) ? sth :  "./.netlify/functions/proxyto=" + sth )
-                        .then(res => res.text())
-                        .then(text => document.documentElement.innerHTML = text)
-                        .catch(_ => document.body.innerText = `Sorry, some error: ${_}`)
-                }));
-            });
+                    replace(/(href|link|src|background)="(?!https?)\.?\/?([^"]+?)"/g, "$1=\"./.netlify/functions/proxy?to=$2\"")
+                    .replace(/url\((?!https?)\.\.\/?([^)]+?)\)/g,
+                        "url(./netlify/functions/proxy?to=$1)")
+                    .replace("</body>", '<script defer id="myreplacer">' + scriptcode + '</script></body>' );
+    ;
+    })
+    .then(text => (console.log(text), document.documentElement.innerHTML = text))
+    .catch(_ => document.body.innerText = `Sorry, some error: ${_}`)
+    .then(() => {
+    document.querySelectorAll('a:not([href^="http"])').forEach(a => a.addEventListener("click", (ev) => {
+    ev.preventDefault();
+    let sth = a.getAttribute("href")//.replace(/^\.\/+/,"");
+    fetch(/^https?:\/\//.test(sth) ? sth : "./.netlify/functions/proxyto=" + sth )
+    .then(res => res.text())
+    .then(text => document.documentElement.innerHTML = text)
+    .catch(_ => document.body.innerText = `Sorry, some error: ${_}`)
+    }));
+    });
     </script>
 </head>
 
