@@ -1,10 +1,10 @@
 fetch("./.netlify/functions/proxy")
 .then(res => res.text())
 .then(text => {
-    const urlAttributesRegex = /(href|link|src|background)="(?!https?:\/\/)|(\.?\/?)([^"]+?)"/g;
-    const urlCssRegex = /url\((?!https?:\/\/)|(\.?\/?)([^)"]+?)|("[^)"]+")\)/g;
+    const urlAttributesRegex = /(href|link|src|background)="(?!https?:\/\/)|(\.?\.?\/?)([^"]+?)"/g;
+    const urlCssRegex = /url\((?!https?:\/\/)|(\.?\.?\/?)([^)"]+?)|(\"[^)"]+\")\)/g;
 
-    return text.replace(urlAttributesRegex, "$1=\"./.netlify/functions/proxy?to=$2\"")
+    return text.replace(urlAttributesRegex, "$1=\"./.netlify/functions/proxy?to=$3$4\"")
         .replace(urlCssRegex, "url(./netlify/functions/proxy?to=$1)")
         ;
 })
